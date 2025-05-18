@@ -11,5 +11,11 @@ public interface BookCredentialRepository extends JpaRepository<BookCredential, 
 	List<BookCredential> findByBookGenre(BookGenreEnum bookGenre);
 	
 	List<BookCredential> findByBookGenreAndPagesAmountBetween(BookGenreEnum genre, int min, int max);
+	
+	List<BookCredential> findByBookGenreAndPagesAmountBetweenOrderByPagesAmountAsc(
+		    BookGenreEnum genre,
+		    int min,
+		    int max
+		);
 
 }

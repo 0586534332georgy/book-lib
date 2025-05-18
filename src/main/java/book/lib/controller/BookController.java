@@ -38,8 +38,8 @@ public class BookController {
     }
     
     
-//  http://localhost:8080/api/books2-by-genre-and-pages?genre=Horror&min=200&max=400
-    @GetMapping("/books2-by-genre-and-pages")
+//  http://localhost:8080/api/books-by-genre-and-pages?genre=Horror&min=200&max=400
+    @GetMapping("/books-by-genre-and-pages")
     public List<BookCredential> getBooksByGenreAndPages (
     		@RequestParam BookGenreEnum genre,
     		@RequestParam int min,
@@ -48,4 +48,16 @@ public class BookController {
     	{
     	return bookCredentialRepository.findByBookGenreAndPagesAmountBetween(genre, min, max);
     }
+    
+    @GetMapping("/books-by-genre-and-pages-ordered")
+    public List<BookCredential> getBooksByGenreAndPagesOrdered (
+    		@RequestParam BookGenreEnum genre,
+    		@RequestParam int min,
+    		@RequestParam int max
+    		) 
+    	{
+    	return bookCredentialRepository.findByBookGenreAndPagesAmountBetweenOrderByPagesAmountAsc(genre, min, max);
+    }
+    
+    
 }
