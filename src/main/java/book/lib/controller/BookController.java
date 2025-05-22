@@ -49,6 +49,7 @@ public class BookController {
     	return bookCredentialRepository.findByBookGenreAndPagesAmountBetween(genre, min, max);
     }
     
+//  http://localhost:8080/api/books-by-genre-and-pages-ordered?genre=Horror&min=200&max=400    
     @GetMapping("/books-by-genre-and-pages-ordered")
     public List<BookCredential> getBooksByGenreAndPagesOrdered (
     		@RequestParam BookGenreEnum genre,
