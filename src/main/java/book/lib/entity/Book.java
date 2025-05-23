@@ -13,9 +13,11 @@ public class Book {
 	@Column(name = "id_book")
 	private Integer id;	
 
-    private String author_surname;
+	@Column(name = "author_surname")
+    private String authorSurname;
 
-    private String author_name;
+	@Column(name = "id_name")
+    private String authorName;
 
     @Column(name = "bookname")
     private String title;
