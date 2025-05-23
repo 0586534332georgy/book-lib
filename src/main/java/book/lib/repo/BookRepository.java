@@ -6,7 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import book.lib.api.BookGenreEnum;
 import book.lib.dto.BookCredentialsDto;
 import book.lib.entity.Book;
 
@@ -31,7 +30,7 @@ public interface BookRepository extends JpaRepository<Book, Integer> {
             WHERE c.book_genre:: text = :genre
             """,
             nativeQuery = true)
-    List<BookCredentialsDto> findByBookGenre(@Param("genre") BookGenreEnum genre);
+    List<BookCredentialsDto> findByBookGenre(@Param("genre") String genre);
 
     @Query(value = """
     		SELECT
@@ -47,7 +46,7 @@ public interface BookRepository extends JpaRepository<Book, Integer> {
             AND c.pages_amount BETWEEN :min AND :max
             """,
             nativeQuery = true)
-    List<BookCredentialsDto> findByBookGenreAndPagesAmountBetween(@Param("genre") BookGenreEnum genre,
+    List<BookCredentialsDto> findByBookGenreAndPagesAmountBetween(@Param("genre") String genre,
                                                                   @Param("min") int min,
                                                                   @Param("max") int max);
 
@@ -65,7 +64,7 @@ public interface BookRepository extends JpaRepository<Book, Integer> {
             AND c.pages_amount BETWEEN :min AND :max 
             ORDER BY c.pages_amount ASC            
     		""", nativeQuery = true)
-    List<BookCredentialsDto> findByBookGenreAndPagesAmountBetweenOrderByPagesAmountAsc(@Param("genre") BookGenreEnum genre,
+    List<BookCredentialsDto> findByBookGenreAndPagesAmountBetweenOrderByPagesAmountAsc(@Param("genre") String genre,
                                                                                        @Param("min") int min,
                                                                                        @Param("max") int max);
 

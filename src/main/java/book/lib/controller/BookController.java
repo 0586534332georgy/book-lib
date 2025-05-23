@@ -19,23 +19,20 @@ public class BookController {
 
 	@Autowired
 	private BookRepository bookRepo;
-	
-//	@Autowired
-//    private BookCredentialsDtoRepo bookDtoRepo;
 
 	@GetMapping("/books")
 	public List<Book> getAll() {
 		return bookRepo.findAll();
 	}
 	
-	
-//	Derived Query Method
+
 //	http://localhost:8080/api/books-by-genre?bookGenre=Fantasy
     @GetMapping("/books-by-genre")
     public List<BookCredentialsDto> getBooksByGenre(@RequestParam BookGenreEnum bookGenre) {
-        return bookRepo.findByBookGenre(bookGenre);
+    	String dbGenre = bookGenre.name();
+        return bookRepo.findByBookGenre(dbGenre);
     }
-    
+
     
 //  http://localhost:8080/api/books-by-genre-and-pages?genre=Horror&min=200&max=400
     @GetMapping("/books-by-genre-and-pages")
@@ -45,7 +42,8 @@ public class BookController {
     		@RequestParam int max
     		) 
     	{
-    	return bookRepo.findByBookGenreAndPagesAmountBetween(genre, min, max);
+    	String dbGenre = genre.name();
+    	return bookRepo.findByBookGenreAndPagesAmountBetween(dbGenre, min, max);
     }
     
 //  http://localhost:8080/api/books-by-genre-and-pages-ordered?genre=Horror&min=200&max=400    
@@ -56,7 +54,8 @@ public class BookController {
     		@RequestParam int max
     		) 
     	{
-    	return bookRepo.findByBookGenreAndPagesAmountBetweenOrderByPagesAmountAsc(genre, min, max);
+    	String dbGenre = genre.name();
+    	return bookRepo.findByBookGenreAndPagesAmountBetweenOrderByPagesAmountAsc(dbGenre, min, max);
     }
     
     
