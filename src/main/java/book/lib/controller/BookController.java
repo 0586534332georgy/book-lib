@@ -10,8 +10,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import book.lib.api.BookGenreEnum;
 import book.lib.dto.BookCredentialsDto;
+import book.lib.dto.BookFreeDto;
+import book.lib.dto.BookReservedDto;
 import book.lib.entity.Book;
 import book.lib.repo.BookRepository;
+import book.lib.repo.StatusRepository;
 
 @RestController
 @RequestMapping("/api")
@@ -19,6 +22,9 @@ public class BookController {
 
 	@Autowired
 	private BookRepository bookRepo;
+	
+	@Autowired
+	private StatusRepository statusRepo;
 
 	@GetMapping("/books")
 	public List<Book> getAll() {
@@ -56,6 +62,16 @@ public class BookController {
     	{
     	String dbGenre = genre.name();
     	return bookRepo.findByBookGenreAndPagesAmountBetweenOrderByPagesAmountAsc(dbGenre, min, max);
+    }
+    
+    @GetMapping("/books-free")
+    public List<BookFreeDto> getFreeBooks() {
+    	return statusRepo.getFreeBooks();
+    }
+    
+    @GetMapping("/books-reserved")
+    public List<BookReservedDto> getReservedBooks() {
+    	return statusRepo.getReservedBooks();
     }
     
     
