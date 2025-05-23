@@ -18,8 +18,8 @@ create table book_status (
 ALTER TABLE book_status
 ALTER COLUMN reserved_status SET DEFAULT false;
 
-create type book_genre_enum AS ENUM ('Fantasy', 'Horror', 'Drama', 'Comedy', 'Non_Fiction' );
-ALTER TYPE book_genre_enum ADD VALUE 'Historical_novel';
+create type book_genre_enum AS ENUM ('Fantasy', 'Horror', 'Drama', 'Comedy', 'NonFiction' );
+ALTER TYPE book_genre_enum ADD VALUE 'HistoricalNovel';
 
 SELECT unnest(enum_range(NULL::book_genre_enum));
 
@@ -88,7 +88,7 @@ INSERT INTO book_status(id_book, condition_status) VALUES
 (15, 'NEW');
 
 ==========================================================================
--- 'Fantasy', 'Horror', 'Drama', 'Comedy', 'Non_Fiction'
+-- 'Fantasy', 'Horror', 'Drama', 'Comedy', 'NonFiction'
 INSERT INTO book_credential(id_book, book_genre, pages_amount) VALUES
 (1, 'Fantasy', 1216),
 (2, 'Fantasy', 720),
@@ -102,12 +102,12 @@ INSERT INTO book_credential(id_book, book_genre, pages_amount) VALUES
 (10, 'Comedy', 224),
 (11, 'Comedy', 248),
 (12, 'Comedy', 288),
-(13, 'Non_Fiction', 464),
-(14, 'Non_Fiction', 448),
-(15, 'Non_Fiction', 212);
+(13, 'NonFiction', 464),
+(14, 'NonFiction', 448),
+(15, 'NonFiction', 212);
 
 INSERT INTO book_credential(id_book, book_genre, pages_amount) VALUES
-(16, 'Historical_novel', 1200);
+(16, 'HistoricalNovel', 1200);
 
 ============================================================================
 
@@ -117,7 +117,7 @@ SELECT
 	b.author_surname AS author_surname,
     b.author_name AS author_name,
 	b.bookname AS bookname,
-    c.book_genre AS book_genre,
+    c.book_genre::text AS book_genre,
     c.pages_amount AS pages_amount
 FROM 
     book_library b
