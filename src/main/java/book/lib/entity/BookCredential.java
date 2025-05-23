@@ -20,8 +20,8 @@ public class BookCredential {
 	@Column(name = "pages_amount")
 	private Integer pagesAmount;
 	
-    @OneToOne
-    @JoinColumn(name = "id_book", referencedColumnName = "id_book")
-    private Book book;
+//    @OneToOne
+//    @JoinColumn(name = "id_book", referencedColumnName = "id_book")
+//    private Book book;
 
 }

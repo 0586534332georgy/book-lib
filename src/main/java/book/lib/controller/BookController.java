@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 import book.lib.api.BookGenreEnum;
 import book.lib.dto.BookCredentialsDto;
 import book.lib.entity.Book;
-import book.lib.entity.BookCredential;
-import book.lib.repo.BookCredentialsDtoRepo;
 import book.lib.repo.BookRepository;
 
 @RestController
@@ -20,14 +18,14 @@ import book.lib.repo.BookRepository;
 public class BookController {
 
 	@Autowired
-	private BookRepository bookRepository;
+	private BookRepository bookRepo;
 	
-	@Autowired
-    private BookCredentialsDtoRepo bookDtoRepo;
+//	@Autowired
+//    private BookCredentialsDtoRepo bookDtoRepo;
 
 	@GetMapping("/books")
 	public List<Book> getAll() {
-		return bookRepository.findAll();
+		return bookRepo.findAll();
 	}
 	
 	
@@ -35,7 +33,7 @@ public class BookController {
 //	http://localhost:8080/api/books-by-genre?bookGenre=Fantasy
     @GetMapping("/books-by-genre")
     public List<BookCredentialsDto> getBooksByGenre(@RequestParam BookGenreEnum bookGenre) {
-        return bookDtoRepo.findByBookGenre(bookGenre);
+        return bookRepo.findByBookGenre(bookGenre);
     }
     
     
@@ -47,7 +45,7 @@ public class BookController {
     		@RequestParam int max
     		) 
     	{
-    	return bookDtoRepo.findByBookGenreAndPagesAmountBetween(genre, min, max);
+    	return bookRepo.findByBookGenreAndPagesAmountBetween(genre, min, max);
     }
     
 //  http://localhost:8080/api/books-by-genre-and-pages-ordered?genre=Horror&min=200&max=400    
@@ -58,7 +56,7 @@ public class BookController {
     		@RequestParam int max
     		) 
     	{
-    	return bookDtoRepo.findByBookGenreAndPagesAmountBetweenOrderByPagesAmountAsc(genre, min, max);
+    	return bookRepo.findByBookGenreAndPagesAmountBetweenOrderByPagesAmountAsc(genre, min, max);
     }
     
     
