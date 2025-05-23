@@ -9,9 +9,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import book.lib.api.BookGenreEnum;
+import book.lib.entity.AllAboutBook;
 import book.lib.entity.Book;
 import book.lib.entity.BookCredential;
-import book.lib.repo.BookCredentialRepository;
+import book.lib.repo.AllAboutBookRepository;
 import book.lib.repo.BookRepository;
 
 @RestController
@@ -22,7 +23,7 @@ public class BookController {
 	private BookRepository bookRepository;
 	
 	@Autowired
-    private BookCredentialRepository bookCredentialRepository;
+    private AllAboutBookRepository allAboutBookRepo;
 
 	@GetMapping("/books")
 	public List<Book> getAll() {
@@ -33,31 +34,31 @@ public class BookController {
 //	Derived Query Method
 //	http://localhost:8080/api/books-by-genre?bookGenre=Fantasy
     @GetMapping("/books-by-genre")
-    public List<BookCredential> getBooksByGenre(@RequestParam BookGenreEnum bookGenre) {
-        return bookCredentialRepository.findByBookGenre(bookGenre);
+    public List<AllAboutBook> getBooksByGenre(@RequestParam BookGenreEnum bookGenre) {
+        return allAboutBookRepo.findByBookGenre(bookGenre);
     }
     
     
 //  http://localhost:8080/api/books-by-genre-and-pages?genre=Horror&min=200&max=400
     @GetMapping("/books-by-genre-and-pages")
-    public List<BookCredential> getBooksByGenreAndPages (
+    public List<AllAboutBook> getBooksByGenreAndPages (
     		@RequestParam BookGenreEnum genre,
     		@RequestParam int min,
     		@RequestParam int max
     		) 
     	{
-    	return bookCredentialRepository.findByBookGenreAndPagesAmountBetween(genre, min, max);
+    	return allAboutBookRepo.findByBookGenreAndPagesAmountBetween(genre, min, max);
     }
     
 //  http://localhost:8080/api/books-by-genre-and-pages-ordered?genre=Horror&min=200&max=400    
     @GetMapping("/books-by-genre-and-pages-ordered")
-    public List<BookCredential> getBooksByGenreAndPagesOrdered (
+    public List<AllAboutBook> getBooksByGenreAndPagesOrdered (
     		@RequestParam BookGenreEnum genre,
     		@RequestParam int min,
     		@RequestParam int max
     		) 
     	{
-    	return bookCredentialRepository.findByBookGenreAndPagesAmountBetweenOrderByPagesAmountAsc(genre, min, max);
+    	return allAboutBookRepo.findByBookGenreAndPagesAmountBetweenOrderByPagesAmountAsc(genre, min, max);
     }
     
     
