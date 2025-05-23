@@ -18,8 +18,13 @@ create table book_status (
 ALTER TABLE book_status
 ALTER COLUMN reserved_status SET DEFAULT false;
 
+create type book_genre_enum AS ENUM ('Fantasy', 'Horror', 'Drama', 'Comedy', 'Non_Fiction' );
+ALTER TYPE book_genre_enum ADD VALUE 'Historical_novel';
 
-create type book_genre_enum AS ENUM ('Fantasy', 'Horror', 'Drama', 'Comedy', 'Non-Fiction' );
+SELECT unnest(enum_range(NULL::book_genre_enum));
+
+DROP TYPE book_genre_enum cascade;
+
 create table book_credential (
 	id_book integer NOT NULL PRIMARY KEY,
 	book_genre book_genre_enum,
@@ -31,6 +36,7 @@ select * from book_library;
 select * from book_status;
 select * from book_credential;
 drop table book_library CASCADE;
+drop table book_credential CASCADE;
 
 ===========================================================================
 -- Fantasy
@@ -53,12 +59,15 @@ INSERT INTO book_library (author_surname, author_name, bookname) VALUES
 ('Adams', 'Douglas', 'The Hitchhiker''s Guide to the Galaxy'),
 ('Wodehouse', 'Pelham Grenville', 'Right Ho, Jeeves'),
 ('Fielding', 'Helen', 'Bridget Jones''s Diary');
--- Non-Fiction
+-- Non_Fiction
 INSERT INTO book_library (author_surname, author_name, bookname) VALUES
 ('Harari', 'Yuval Noah', 'Sapiens: A Brief History of Humankind'),
 ('Obama', 'Michelle', 'Becoming'),
 ('Hawking', 'Stephen', 'A Brief History of Time');
-
+==========================================================================
+-- Historical_novel
+INSERT INTO book_library (author_surname, author_name, bookname) VALUES
+('Tolstoy', 'Lev', 'War and Peace');
 ==========================================================================
 
 INSERT INTO book_status(id_book, condition_status) VALUES
@@ -79,7 +88,7 @@ INSERT INTO book_status(id_book, condition_status) VALUES
 (15, 'NEW');
 
 ==========================================================================
--- 'Fantasy', 'Horror', 'Drama', 'Comedy', 'Non-Fiction'
+-- 'Fantasy', 'Horror', 'Drama', 'Comedy', 'Non_Fiction'
 INSERT INTO book_credential(id_book, book_genre, pages_amount) VALUES
 (1, 'Fantasy', 1216),
 (2, 'Fantasy', 720),
@@ -93,18 +102,21 @@ INSERT INTO book_credential(id_book, book_genre, pages_amount) VALUES
 (10, 'Comedy', 224),
 (11, 'Comedy', 248),
 (12, 'Comedy', 288),
-(13, 'Non-Fiction', 464),
-(14, 'Non-Fiction', 448),
-(15, 'Non-Fiction', 212);
+(13, 'Non_Fiction', 464),
+(14, 'Non_Fiction', 448),
+(15, 'Non_Fiction', 212);
+
+INSERT INTO book_credential(id_book, book_genre, pages_amount) VALUES
+(16, 'Historical_novel', 1200);
 
 ============================================================================
 
 CREATE VIEW all_about_book AS
 SELECT 
-    b.id_book AS id_book,
-    b.bookname AS bookname,
+    b.id_book AS id_book,    
 	b.author_surname AS author_surname,
-    b.author_name AS author_name,    
+    b.author_name AS author_name,
+	b.bookname AS bookname,
     c.book_genre AS book_genre,
     c.pages_amount AS pages_amount
 FROM 

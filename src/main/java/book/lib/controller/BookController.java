@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 import book.lib.api.BookGenreEnum;
 import book.lib.entity.AllAboutBook;
 import book.lib.entity.Book;
-import book.lib.entity.BookCredential;
 import book.lib.repo.AllAboutBookRepository;
 import book.lib.repo.BookRepository;
 
