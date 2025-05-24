@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -77,6 +78,18 @@ public class BookController {
     @GetMapping("/books-reserved")
     public List<BookReservedDto> getReservedBooks() {
     	return statusRepo.getReservedBooks();
+    }
+    
+    @PutMapping("/free-book")
+    public int setBookFree(@RequestParam String title) {
+    	return statusRepo.setBookFree(title);
+    	
+    }
+    
+    @PutMapping("/reserve-book")
+    public int setBookReserved(@RequestParam String title) {
+    	return statusRepo.setBookReserved(title);
+    	
     }
     
     

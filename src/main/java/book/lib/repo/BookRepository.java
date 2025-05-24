@@ -12,7 +12,7 @@ import book.lib.entity.Book;
 
 public interface BookRepository extends JpaRepository<Book, Integer> {
 	
-//    @Query(value = "SELECT * FROM book_library", nativeQuery = true)
+    @Query(value = "SELECT * FROM book_library", nativeQuery = true)
     List<BookDto> findAllBooks();
 
     @Query(value = "SELECT * FROM book_library WHERE id_book = :id", nativeQuery = true)
