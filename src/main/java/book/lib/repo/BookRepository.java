@@ -7,12 +7,13 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import book.lib.dto.BookCredentialsDto;
+import book.lib.dto.BookDto;
 import book.lib.entity.Book;
 
 public interface BookRepository extends JpaRepository<Book, Integer> {
 	
-    @Query(value = "SELECT * FROM book_library", nativeQuery = true)
-    List<Book> findAllBooks();
+//    @Query(value = "SELECT * FROM book_library", nativeQuery = true)
+    List<BookDto> findAllBooks();
 
     @Query(value = "SELECT * FROM book_library WHERE id_book = :id", nativeQuery = true)
     Book findBookById(@Param("id") int id);

@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import book.lib.dto.BookFreeDto;
+import book.lib.dto.BookDto;
 import book.lib.dto.BookReservedDto;
 import book.lib.entity.BookStatus;
 
@@ -22,7 +22,7 @@ public interface StatusRepository extends JpaRepository<BookStatus, Integer> {
 			LEFT JOIN book_status s ON b.id_book = s.id_book
 			WHERE s.reserved_status = false			
 			""", nativeQuery = true)
-	List<BookFreeDto> getFreeBooks();
+	List<BookDto> getFreeBooks();
 	
 	@Query(value = """
 			SELECT

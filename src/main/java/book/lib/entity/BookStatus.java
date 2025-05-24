@@ -26,8 +26,7 @@ public class BookStatus {
 	private LocalDate reservedDate;
 	
 	@Column(name = "condition_status")
-	private BookStatusEnum conditionStatus;
-	
+	private BookStatusEnum conditionStatus;	
 	
 
 }

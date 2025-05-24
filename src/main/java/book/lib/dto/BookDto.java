@@ -2,7 +2,7 @@ package book.lib.dto;
 
 import book.lib.api.BookGenreEnum;
 
-public interface BookFreeDto {
+public interface BookDto {
 	
 	String getTitle();
 

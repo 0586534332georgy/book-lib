@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import book.lib.api.BookGenreEnum;
 import book.lib.dto.BookCredentialsDto;
-import book.lib.dto.BookFreeDto;
+import book.lib.dto.BookDto;
 import book.lib.dto.BookReservedDto;
 import book.lib.entity.Book;
 import book.lib.repo.BookRepository;
@@ -29,6 +29,11 @@ public class BookController {
 	@GetMapping("/books")
 	public List<Book> getAll() {
 		return bookRepo.findAll();
+	}
+	
+	@GetMapping("/books-dto")
+	public List<BookDto> getAll2() {
+		return bookRepo.findAllBooks();
 	}
 	
 
@@ -65,7 +70,7 @@ public class BookController {
     }
     
     @GetMapping("/books-free")
-    public List<BookFreeDto> getFreeBooks() {
+    public List<BookDto> getFreeBooks() {
     	return statusRepo.getFreeBooks();
     }
     
