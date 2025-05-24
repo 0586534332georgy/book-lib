@@ -15,65 +15,59 @@ import book.lib.entity.BookStatus;
 public interface StatusRepository extends JpaRepository<BookStatus, Integer> {
 	
 	@Query(value = """
-			SELECT
-			b.bookname AS title, 
-			b.author_surname AS authorSurname, 
-            b.author_name AS authorName,
-            c.book_genre AS bookGenre			
-			FROM book_library b
-			LEFT JOIN book_credential c ON b.id_book = c.id_book
-			LEFT JOIN book_status s ON b.id_book = s.id_book
-			WHERE s.reserved_status = false			
-			""", nativeQuery = true)
+        SELECT 
+            b.title AS title,
+            b.authorSurname AS authorSurname,
+            b.authorName AS authorName,
+            c.bookGenre AS bookGenre
+        FROM Book b
+        LEFT JOIN BookCredential c ON b.id = c.book.id
+        LEFT JOIN BookStatus s ON b.id = s.id
+        WHERE s.reservedStatus = false		
+			""")
 	List<BookDto> getFreeBooks();
 	
 	@Query(value = """
-			SELECT
-			b.bookname AS title, 
-			b.author_surname AS authorSurname, 
-            b.author_name AS authorName,
-            c.book_genre AS bookGenre,
-            s.reserved_date AS reservedDate			
-			FROM book_library b
-			LEFT JOIN book_credential c ON b.id_book = c.id_book
-			LEFT JOIN book_status s ON b.id_book = s.id_book
-			WHERE s.reserved_status = true			
-			""", nativeQuery = true)
+        SELECT 
+            b.title AS title,
+            b.authorSurname AS authorSurname,
+            b.authorName AS authorName,
+            c.bookGenre AS bookGenre,
+            s.reservedDate AS reservedDate
+        FROM Book b
+        LEFT JOIN BookCredential c ON b.id = c.book.id
+        LEFT JOIN BookStatus s ON b.id = s.id
+        WHERE s.reservedStatus = true			
+			""")
 	List<BookReservedDto> getReservedBooks();
 	
 	@Modifying
 	@Transactional
 	@Query(value="""
-			UPDATE book_status
-			SET reserved_status = false,
-			    reserved_date = NULL
-			WHERE
-			 	reserved_status = true
-			 	AND id_book = (
-					SELECT b.id_book 
-					FROM book_library b
-					where b.bookname = :title
-					LIMIT 1
-				)
-				""", nativeQuery = true)	
+        UPDATE BookStatus s
+        SET s.reservedStatus = false,
+            s.reservedDate = null
+        WHERE s.reservedStatus = true
+        AND s.id = (
+            SELECT b.id FROM Book b
+            WHERE b.title = :title
+        )
+				""")	
 	int setBookFree(@Param("title") String title);
 	
 	
 	@Modifying
 	@Transactional
 	@Query(value="""
-			UPDATE book_status
-			SET reserved_status = true,
-			    reserved_date = CURRENT_DATE
-			WHERE 
-				reserved_status = false    
-				AND id_book = (
-					SELECT b.id_book 
-					FROM book_library b
-					where b.bookname = :title				
-					LIMIT 1
-				)
-				""", nativeQuery = true)	
+        UPDATE BookStatus s
+        SET s.reservedStatus = true,
+            s.reservedDate = CURRENT_DATE
+        WHERE s.reservedStatus = false
+        AND s.id = (
+            SELECT b.id FROM Book b
+            WHERE b.title = :title
+        )
+				""")	
 	int setBookReserved(@Param("title") String title);
 
 }

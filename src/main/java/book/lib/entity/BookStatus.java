@@ -2,13 +2,11 @@ package book.lib.entity;
 
 import java.time.LocalDate;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import book.lib.api.BookStatusEnum;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import lombok.Getter;
-import lombok.Setter;
+import jakarta.persistence.*;
+import lombok.*;
 
 @Getter
 @Setter
@@ -25,8 +23,13 @@ public class BookStatus {
 	@Column(name = "reserved_date")	
 	private LocalDate reservedDate;
 	
+	@Enumerated(EnumType.STRING)
 	@Column(name = "condition_status")
 	private BookStatusEnum conditionStatus;	
 	
+	@OneToOne
+	@JoinColumn(name = "id_book")
+	@JsonBackReference
+	private Book book;
 
 }

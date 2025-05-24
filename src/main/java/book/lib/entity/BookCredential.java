@@ -1,5 +1,7 @@
 package book.lib.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import book.lib.api.BookGenreEnum;
 import jakarta.persistence.*;
 import lombok.*;
@@ -19,5 +21,10 @@ public class BookCredential {
 	
 	@Column(name = "pages_amount")
 	private Integer pagesAmount;
+	
+	@OneToOne
+	@JoinColumn(name = "id_book")
+	@JsonBackReference
+	private Book book;
 
 }
