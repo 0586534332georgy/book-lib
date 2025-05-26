@@ -1,15 +1,21 @@
 package book.lib.dto;
 
 import book.lib.api.BookGenreEnum;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-public interface BookDto {
+@Getter
+@Setter
+@NoArgsConstructor
+public class BookDto {
 	
-	String getTitle();
+	String title;
 
-    String getAuthorSurname();
+    String authorSurname;
 
-    String getAuthorName();    
+    String authorName;    
 
-    BookGenreEnum getBookGenre();
+    BookGenreEnum bookGenre;
 
 }

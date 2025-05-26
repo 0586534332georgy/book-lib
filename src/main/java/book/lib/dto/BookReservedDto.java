@@ -3,17 +3,23 @@ package book.lib.dto;
 import java.time.LocalDate;
 
 import book.lib.api.BookGenreEnum;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-public interface BookReservedDto {
+@Getter
+@Setter
+@NoArgsConstructor
+public class BookReservedDto {
 	
-	String getTitle();
+	String title;
 
-    String getAuthorSurname();
+    String authorSurname;
 
-    String getAuthorName();
+    String authorName;
 
-    BookGenreEnum getBookGenre();
+    BookGenreEnum bookGenre;
     
-    LocalDate getReservedDate();
+    LocalDate reservedDate;
 
 }
