@@ -12,7 +12,15 @@ import book.lib.entity.Book;
 
 public interface BookRepository extends JpaRepository<Book, Integer> {
 	
-    @Query(value = "SELECT * FROM book_library", nativeQuery = true)
+    @Query(value = """    		
+    		SELECT 
+	            b.bookname AS title,
+	            b.author_surname AS authorSurname,
+	            b.author_name AS authorName,
+	            c.book_genre AS bookGenre
+		    FROM book_library b
+		    LEFT JOIN book_credential c ON b.id_book = c.id_book
+    		""", nativeQuery = true)
     List<BookDto> findAllBooks();
 
     @Query(value = "SELECT * FROM book_library WHERE id_book = :id", nativeQuery = true)
