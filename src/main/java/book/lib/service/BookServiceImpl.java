@@ -9,56 +9,54 @@ import book.lib.dto.BookCredentialsDto;
 import book.lib.dto.BookDto;
 import book.lib.dto.BookReservedDto;
 import book.lib.entity.Book;
-import book.lib.repo.BookRepository;
-import book.lib.repo.StatusRepository;
+import book.lib.repo.BookRepositoryJdbc;
 import lombok.RequiredArgsConstructor;
 
 
 @Service
 @RequiredArgsConstructor
 public class BookServiceImpl implements BookService {
-
-	final private BookRepository bookRepo;
-
-	final private StatusRepository statusRepo;
+	
+	final private BookRepositoryJdbc bookRepoJdbc;
 
 	public List<Book> getAll() {
-		return bookRepo.findAll();
+//		return bookRepoJdbc.findAll();
+		throw new UnsupportedOperationException("This method is not supported in JdbcTemplate version.");
 	}
 
 	public List<BookDto> getAll2() {
-		return bookRepo.findAllBooks();
+		return bookRepoJdbc.findAllBooks();
 	}
 
 	public List<BookCredentialsDto> getBooksByGenre(BookGenreEnum bookGenre) {
 		String dbGenre = bookGenre.name();
-		return bookRepo.findByBookGenre(dbGenre);
+		return bookRepoJdbc.findByBookGenre(dbGenre);
 	}
 
 	public List<BookCredentialsDto> getBooksByGenreAndPages(BookGenreEnum genre, int min, int max) {
 		String dbGenre = genre.name();
-		return bookRepo.findByBookGenreAndPagesAmountBetween(dbGenre, min, max);
+		return bookRepoJdbc.findByBookGenreAndPagesAmountBetween(dbGenre, min, max);
 	}
 
 	public List<BookCredentialsDto> getBooksByGenreAndPagesOrdered(BookGenreEnum genre, int min, int max) {
 		String dbGenre = genre.name();
-		return bookRepo.findByBookGenreAndPagesAmountBetweenOrderByPagesAmountAsc(dbGenre, min, max);
+		return bookRepoJdbc.findByBookGenreAndPagesAmountBetweenOrderByPagesAmountAsc(dbGenre, min, max);
 	}
 
 	public List<BookDto> getFreeBooks() {
-		return statusRepo.getFreeBooks();
+		return bookRepoJdbc.getFreeBooks();
 	}
 
 	public List<BookReservedDto> getReservedBooks() {
-		return statusRepo.getReservedBooks();
+		return bookRepoJdbc.getReservedBooks();
 	}
 
 	public int setBookFree(String title) {
-		return statusRepo.setBookFree(title);
+		return bookRepoJdbc.setBookFree(title);
 	}
 
 	public int setBookReserved(String title) {
-		return statusRepo.setBookReserved(title);
+		return bookRepoJdbc.setBookReserved(title);
 	}
 
 }
