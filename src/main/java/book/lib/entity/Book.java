@@ -1,5 +1,7 @@
 package book.lib.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -13,11 +15,21 @@ public class Book {
 	@Column(name = "id_book")
 	private Integer id;	
 
-    private String author_surname;
+	@Column(name = "author_surname")
+    private String authorSurname;
 
-    private String author_name;
+	@Column(name = "author_name")
+    private String authorName;
 
     @Column(name = "bookname")
     private String title;
+    
+    @OneToOne(mappedBy = "book")
+    @JsonManagedReference
+    private BookCredential credential;
+
+    @OneToOne(mappedBy = "book")
+    @JsonManagedReference
+    private BookStatus status;
 
 }
