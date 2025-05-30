@@ -28,12 +28,12 @@ public interface BookRepository extends JpaRepository<Book, Integer> {
     
     @Query(value = """    		
     		SELECT 
-            c.id_book AS id, 
-            b.author_surname AS authorSurname, 
-            b.author_name AS authorName, 
-            b.bookname AS title, 
-            c.book_genre AS bookGenre, 
-            c.pages_amount AS pagesAmount 
+	            c.id_book AS id, 
+	            b.author_surname AS authorSurname, 
+	            b.author_name AS authorName, 
+	            b.bookname AS title, 
+	            c.book_genre AS bookGenre, 
+	            c.pages_amount AS pagesAmount 
             FROM book_library b 
             JOIN book_credential c ON b.id_book = c.id_book 
             WHERE c.book_genre:: text = :genre
@@ -43,12 +43,12 @@ public interface BookRepository extends JpaRepository<Book, Integer> {
 
     @Query(value = """
     		SELECT
-            c.id_book AS id,
-            b.author_surname AS authorSurname,
-            b.author_name AS authorName,
-            b.bookname AS title,
-            c.book_genre AS bookGenre,
-            c.pages_amount AS pagesAmount
+	            c.id_book AS id,
+	            b.author_surname AS authorSurname,
+	            b.author_name AS authorName,
+	            b.bookname AS title,
+	            c.book_genre AS bookGenre,
+	            c.pages_amount AS pagesAmount
             FROM book_library b
             JOIN book_credential c ON b.id_book = c.id_book
             WHERE c.book_genre:: text = :genre
@@ -61,12 +61,12 @@ public interface BookRepository extends JpaRepository<Book, Integer> {
 
     @Query(value = """    		
     		SELECT 
-            c.id_book AS id, 
-            b.author_surname AS authorSurname, 
-            b.author_name AS authorName, 
-            b.bookname AS title, 
-            c.book_genre AS bookGenre, 
-            c.pages_amount AS pagesAmount 
+	            c.id_book AS id, 
+	            b.author_surname AS authorSurname, 
+	            b.author_name AS authorName, 
+	            b.bookname AS title, 
+	            c.book_genre AS bookGenre, 
+	            c.pages_amount AS pagesAmount 
             FROM book_library b 
             JOIN book_credential c ON b.id_book = c.id_book 
             WHERE c.book_genre:: text = :genre 

@@ -16,10 +16,10 @@ public interface StatusRepository extends JpaRepository<BookStatus, Integer> {
 	
 	@Query(value = """
 			SELECT
-			b.bookname AS title, 
-			b.author_surname AS authorSurname, 
-            b.author_name AS authorName,
-            c.book_genre AS bookGenre			
+				b.bookname AS title, 
+				b.author_surname AS authorSurname, 
+	            b.author_name AS authorName,
+	            c.book_genre AS bookGenre			
 			FROM book_library b
 			LEFT JOIN book_credential c ON b.id_book = c.id_book
 			LEFT JOIN book_status s ON b.id_book = s.id_book
@@ -29,11 +29,11 @@ public interface StatusRepository extends JpaRepository<BookStatus, Integer> {
 	
 	@Query(value = """
 			SELECT
-			b.bookname AS title, 
-			b.author_surname AS authorSurname, 
-            b.author_name AS authorName,
-            c.book_genre AS bookGenre,
-            s.reserved_date AS reservedDate			
+				b.bookname AS title, 
+				b.author_surname AS authorSurname, 
+	            b.author_name AS authorName,
+	            c.book_genre AS bookGenre,
+	            s.reserved_date AS reservedDate			
 			FROM book_library b
 			LEFT JOIN book_credential c ON b.id_book = c.id_book
 			LEFT JOIN book_status s ON b.id_book = s.id_book
