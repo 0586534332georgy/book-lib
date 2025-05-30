@@ -31,8 +31,8 @@ public class BookServiceImpl implements BookService {
 	}
 
 	public List<BookCredentialsDto> getBooksByGenre(BookGenreEnum bookGenre) {
-		String dbGenre = bookGenre.name();
-		return bookRepo.findByBookGenre(dbGenre);
+//		String dbGenre = bookGenre.name();
+		return bookRepo.findByBookGenre(bookGenre);
 	}
 
 	public List<BookCredentialsDto> getBooksByGenreAndPages(BookGenreEnum genre, int min, int max) {

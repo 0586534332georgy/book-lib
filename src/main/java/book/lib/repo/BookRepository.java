@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import book.lib.api.BookGenreEnum;
 import book.lib.dto.BookCredentialsDto;
 import book.lib.dto.BookDto;
 import book.lib.entity.Book;
@@ -38,7 +39,7 @@ public interface BookRepository extends JpaRepository<Book, Integer> {
         JOIN BookCredential c ON b.id = c.id
         WHERE c.bookGenre = :genre
         """)
-    List<BookCredentialsDto> findByBookGenre(@Param("genre") String genre);
+    List<BookCredentialsDto> findByBookGenre(@Param("genre") BookGenreEnum bookGenre);
 
     @Query("""
         SELECT 
