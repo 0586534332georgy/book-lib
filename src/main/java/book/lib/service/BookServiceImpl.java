@@ -36,13 +36,13 @@ public class BookServiceImpl implements BookService {
 	}
 
 	public List<BookCredentialsDto> getBooksByGenreAndPages(BookGenreEnum genre, int min, int max) {
-		String dbGenre = genre.name();
-		return bookRepo.findByBookGenreAndPagesAmountBetween(dbGenre, min, max);
+//		String dbGenre = genre.name();
+		return bookRepo.findByBookGenreAndPagesAmountBetween(genre, min, max);
 	}
 
 	public List<BookCredentialsDto> getBooksByGenreAndPagesOrdered(BookGenreEnum genre, int min, int max) {
-		String dbGenre = genre.name();
-		return bookRepo.findByBookGenreAndPagesAmountBetweenOrderByPagesAmountAsc(dbGenre, min, max);
+//		String dbGenre = genre.name();
+		return bookRepo.findByBookGenreAndPagesAmountBetweenOrderByPagesAmountAsc(genre, min, max);
 	}
 
 	public List<BookDto> getFreeBooks() {

@@ -54,7 +54,7 @@ public interface BookRepository extends JpaRepository<Book, Integer> {
         WHERE c.bookGenre = :genre
           AND c.pagesAmount BETWEEN :min AND :max
         """)
-    List<BookCredentialsDto> findByBookGenreAndPagesAmountBetween(@Param("genre") String genre,
+    List<BookCredentialsDto> findByBookGenreAndPagesAmountBetween(@Param("genre") BookGenreEnum bookGenre,
                                                                   @Param("min") int min,
                                                                   @Param("max") int max);
 
@@ -72,7 +72,7 @@ public interface BookRepository extends JpaRepository<Book, Integer> {
           AND c.pagesAmount BETWEEN :min AND :max
         ORDER BY c.pagesAmount ASC
         """)
-    List<BookCredentialsDto> findByBookGenreAndPagesAmountBetweenOrderByPagesAmountAsc(@Param("genre") String genre,
+    List<BookCredentialsDto> findByBookGenreAndPagesAmountBetweenOrderByPagesAmountAsc(@Param("genre") BookGenreEnum bookGenre,
                                                                                        @Param("min") int min,
                                                                                        @Param("max") int max);
 }
